@@ -1,0 +1,26 @@
+services:
+  api:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - TIDB_HOST=${TIDB_HOST:-demo}
+      - TIDB_USER=${TIDB_USER:-demo}
+      - TIDB_PASSWORD=${TIDB_PASSWORD:-demo}
+      - TIDB_DATABASE=${TIDB_DATABASE:-demo}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-demo}
+    depends_on:
+      - redis
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"

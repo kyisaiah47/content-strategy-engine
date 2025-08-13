@@ -1,0 +1,58 @@
+# Content Strategy Engine - Run Instructions
+
+## Quick Start for Judges
+
+### Option 1: Docker (Recommended)
+1. Clone repository: git clone <repo-url>
+2. Copy environment: cp .env.example .env
+3. Add your API keys to .env (TiDB + OpenAI required)
+4. Start services: docker-compose up -d
+5. Visit: http://localhost:3000
+
+### Option 2: Manual Setup
+Backend:
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python scripts/setup_database.py
+uvicorn app.main:app --reload
+```
+
+Frontend:
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+## Demo Scenarios
+
+### 1. Content Gap Analysis (/gaps)
+- Shows AI analyzing competitor content
+- Identifies high-opportunity topics you're missing
+- Provides actionable recommendations
+
+### 2. AI Content Calendar (/calendar) 
+- Generates 30-day content strategy
+- Includes performance predictions
+- Shows optimal posting times
+
+### 3. Automation Dashboard (/automation)
+- Displays scheduled content
+- Shows performance tracking
+- Demonstrates end-to-end workflow
+
+## API Testing
+- Docs: http://localhost:8000/docs
+- Health: GET /health
+- Analysis: GET /api/v1/analysis/content-gaps-sync?niche=API%20security
+- Calendar: GET /api/v1/calendar/generate-sync?niche=DevOps&days=7
+
+## Tech Stack Highlights
+- **Agentic AI**: Multi-step automated workflow
+- **TiDB Serverless**: Vector + full-text search
+- **Real Impact**: Saves 10+ hours/week content planning
+
+Time to setup: ~5 minutes with Docker
