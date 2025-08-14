@@ -1,122 +1,77 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
+import logging
+
+from app.config import settings
+from app.database.connection import engine, Base
+from app.api.routes import analysis, calendar, automation, dashboard, auth, billing
+from app.middleware.usage_limiter import api_call_limiter, calendar_generation_limiter
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logger.info("Starting up Content Strategy Engine SaaS...")
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    logger.info("Database tables created successfully")
+    yield
+    logger.info("Shutting down Content Strategy Engine...")
+    await engine.dispose()
 
 app = FastAPI(
     title="Content Strategy Engine",
-    description="AI-powered content strategy for TiDB Hackathon 2025",
-    version="1.0.0"
+    description="AI-powered content strategy SaaS for businesses",
+    version="2.0.0",
+    openapi_url=f"{settings.API_V1_STR}/openapi.json",
+    lifespan=lifespan
 )
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["http://localhost:3000", "https://*.vercel.app", "https://yourdomain.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# Include SaaS routes
+app.include_router(auth.router, prefix=f"{settings.API_V1_STR}/auth", tags=["authentication"])
+app.include_router(billing.router, prefix=f"{settings.API_V1_STR}/billing", tags=["billing"])
+
+# Include original routes with usage limiting
+app.include_router(
+    analysis.router,
+    prefix=f"{settings.API_V1_STR}/analysis",
+    tags=["analysis"],
+    dependencies=[Depends(api_call_limiter)]
+)
+
+app.include_router(
+    calendar.router,
+    prefix=f"{settings.API_V1_STR}/calendar",
+    tags=["calendar"],
+    dependencies=[Depends(calendar_generation_limiter)]
+)
+
+app.include_router(automation.router, prefix=f"{settings.API_V1_STR}/automation", tags=["automation"])
+app.include_router(dashboard.router, prefix=f"{settings.API_V1_STR}/dashboard", tags=["dashboard"])
+
 @app.get("/")
 async def root():
     return {
-        "message": "Content Strategy Engine API",
-        "status": "running",
-        "hackathon": "TiDB AgentX 2025"
+        "message": "Content Strategy Engine SaaS",
+        "version": "2.0.0",
+        "status": "production_ready",
+        "features": ["authentication", "billing", "usage_limits", "multi_tenancy"]
     }
 
 @app.get("/health")
-async def health():
-    return {"status": "healthy"}
+async def health_check():
+    return {"status": "healthy", "type": "saas"}
 
-# Demo endpoints for hackathon judges
-@app.get("/api/v1/analysis/content-gaps-sync")
-async def demo_content_gaps(niche: str = "B2B SaaS"):
-    return {
-        "status": "completed",
-        "niche": niche,
-        "analysis": {
-            "content_gaps": [
-                {
-                    "topic": "API Security Best Practices",
-                    "opportunity_score": 0.92,
-                    "reasoning": "High competitor coverage, zero your coverage",
-                    "suggested_angle": "Developer-focused security checklist"
-                },
-                {
-                    "topic": "Cloud Cost Optimization",
-                    "opportunity_score": 0.87,
-                    "reasoning": "Trending topic with high engagement potential",
-                    "suggested_angle": "Real case study with specific savings"
-                }
-            ],
-            "trending_themes": ["AI in DevOps", "Kubernetes Security"],
-            "recommendations": [
-                "Create API security content series",
-                "Focus on practical cloud optimization tips"
-            ]
-        }
-    }
-
-@app.get("/api/v1/calendar/generate-sync")
-async def demo_calendar(niche: str = "DevOps", days: int = 7):
-    return {
-        "status": "completed",
-        "niche": niche,
-        "days": days,
-        "calendar": {
-            "calendar": [
-                {
-                    "day": 1,
-                    "date": "2025-08-14",
-                    "platform": "linkedin",
-                    "topic": "API Security Checklist",
-                    "content_brief": "Share 8 essential API security practices that prevented breaches in production...",
-                    "predicted_engagement": 0.045,
-                    "optimal_time": "09:00"
-                },
-                {
-                    "day": 2,
-                    "date": "2025-08-15",
-                    "platform": "twitter",
-                    "topic": "Docker Optimization Tips",
-                    "content_brief": "Thread: 5 Docker optimization techniques that reduced our image sizes by 80%...",
-                    "predicted_engagement": 0.038,
-                    "optimal_time": "14:30"
-                }
-            ],
-            "weekly_themes": {
-                "week1": "Security & Performance"
-            },
-            "success_metrics": {
-                "target_engagement_rate": 0.045,
-                "target_reach": 10000
-            }
-        }
-    }
-
-@app.get("/api/v1/dashboard/overview")
-async def demo_dashboard():
-    return {
-        "status": "success",
-        "overview": {
-            "content_calendar": {
-                "planned_this_week": 8,
-                "published_this_week": 5,
-                "avg_engagement_rate": 0.045
-            },
-            "performance": {
-                "total_reach_7d": 18500,
-                "avg_engagement_rate_7d": 0.045,
-                "improvement_vs_last_week": 12.5
-            },
-            "automation": {
-                "active": True,
-                "scheduled_posts": 6,
-                "last_briefing": "2025-08-13T09:00:00Z"
-            },
-            "content_gaps": {
-                "opportunities_identified": 8,
-                "high_priority": 3,
-                "trending_topics": 5
-            }
-        }
-    }
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
