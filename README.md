@@ -291,7 +291,7 @@ Shows automation status, engagement metrics, and insights.
 
 ## 👥 **Team**
 
-- **[Your Name]** - Full-stack development, AI integration
+- **Isaiah Kim** - Full-stack development, AI integration
 - **TiDB Serverless** - Vector database and scaling infrastructure
 - **OpenAI GPT-4** - Content analysis and generation
 
