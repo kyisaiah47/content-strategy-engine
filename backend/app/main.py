@@ -13,17 +13,17 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("Starting up Content Strategy Engine SaaS...")
+    logger.info("Starting up Contentr SaaS...")
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     logger.info("Database tables created successfully")
     yield
-    logger.info("Shutting down Content Strategy Engine...")
+    logger.info("Shutting down Contentr...")
     await engine.dispose()
 
 app = FastAPI(
-    title="Content Strategy Engine",
-    description="AI-powered content strategy SaaS for businesses",
+    title="Contentr",
+    description="AI-powered content automation SaaS for businesses",
     version="2.0.0",
     openapi_url=f"{settings.API_V1_STR}/openapi.json",
     lifespan=lifespan
@@ -62,7 +62,7 @@ app.include_router(dashboard.router, prefix=f"{settings.API_V1_STR}/dashboard", 
 @app.get("/")
 async def root():
     return {
-        "message": "Content Strategy Engine SaaS",
+        "message": "Contentr SaaS",
         "version": "2.0.0",
         "status": "production_ready",
         "features": ["authentication", "billing", "usage_limits", "multi_tenancy"]

@@ -1,7 +1,7 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Content Strategy Engine',
+  title: 'Contentr',
   description: 'AI-powered content strategy for TiDB Hackathon 2025',
 }
 

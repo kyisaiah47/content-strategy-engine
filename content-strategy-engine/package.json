@@ -1,21 +1,29 @@
 {
-  "name": "content-strategy-engine",
-  "version": "1.0.0",
-  "description": "AI-powered content strategy engine for TiDB AgentX Hackathon 2025",
-  "private": true,
-  "workspaces": ["frontend"],
-  "scripts": {
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "dev:backend": "cd backend && uvicorn app.main:app --reload",
-    "dev:frontend": "cd frontend && npm run dev",
-    "setup": "cd backend && pip install -r requirements.txt && cd ../frontend && npm install",
-    "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose down"
-  },
-  "devDependencies": {
-    "concurrently": "^8.2.0"
-  },
-  "keywords": ["ai", "content-strategy", "tidb", "hackathon", "automation"],
-  "author": "Your Name",
-  "license": "MIT"
+	"name": "contentr",
+	"version": "1.0.0",
+	"description": "AI-powered Contentr for TiDB AgentX Hackathon 2025",
+	"private": true,
+	"workspaces": [
+		"frontend"
+	],
+	"scripts": {
+		"dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+		"dev:backend": "cd backend && uvicorn app.main:app --reload",
+		"dev:frontend": "cd frontend && npm run dev",
+		"setup": "cd backend && pip install -r requirements.txt && cd ../frontend && npm install",
+		"docker:up": "docker-compose up -d",
+		"docker:down": "docker-compose down"
+	},
+	"devDependencies": {
+		"concurrently": "^8.2.0"
+	},
+	"keywords": [
+		"ai",
+		"content-strategy",
+		"tidb",
+		"hackathon",
+		"automation"
+	],
+	"author": "Your Name",
+	"license": "MIT"
 }

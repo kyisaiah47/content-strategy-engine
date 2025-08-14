@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Content Strategy Engine Repository Setup Script
+# Contentr Repository Setup Script
 # Run this script to create the complete repository structure
 
-echo "🚀 Setting up Content Strategy Engine repository..."
+echo "🚀 Setting up Contentr repository..."
 
 # Create root directory
-mkdir -p content-strategy-engine
-cd content-strategy-engine
+mkdir -p contentr
+cd contentr
 
 # Initialize git
 git init
@@ -78,7 +78,7 @@ echo "📄 Creating LICENSE..."
 cat > LICENSE << 'EOF'
 MIT License
 
-Copyright (c) 2025 Content Strategy Engine
+Copyright (c) 2025 Contentr
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -103,9 +103,9 @@ EOF
 echo "📦 Creating root package.json..."
 cat > package.json << 'EOF'
 {
-  "name": "content-strategy-engine",
+  "name": "contentr",
   "version": "1.0.0",
-  "description": "AI-powered content strategy engine for TiDB AgentX Hackathon 2025",
+  "description": "AI-powered Contentr for TiDB AgentX Hackathon 2025",
   "private": true,
   "workspaces": ["frontend"],
   "scripts": {
@@ -129,12 +129,12 @@ echo "✅ Repository structure created!"
 echo ""
 echo "📋 Next steps:"
 echo "1. Copy the files from the artifact into their respective directories"
-echo "2. cd content-strategy-engine"
+echo "2. cd contentr"
 echo "3. Create GitHub repository and push:"
 echo "   git add ."
-echo "   git commit -m 'Initial commit: Content Strategy Engine'"
+echo "   git commit -m 'Initial commit: Contentr'"
 echo "   git branch -M main"
-echo "   git remote add origin https://github.com/yourusername/content-strategy-engine.git"
+echo "   git remote add origin https://github.com/yourusername/contentr.git"
 echo "   git push -u origin main"
 echo ""
 echo "🎯 Repository ready for TiDB AgentX Hackathon 2025!"

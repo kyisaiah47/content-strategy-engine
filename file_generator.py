@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Automated file generator for Content Strategy Engine
+Automated file generator for Contentr
 This script creates all files from the artifact automatically
 """
 
@@ -21,15 +21,15 @@ def create_file(filepath, content):
 def main():
     """Generate all repository files"""
     
-    if not os.path.exists('content-strategy-engine'):
+    if not os.path.exists('contentr'):
         print("❌ Please run the setup script first to create the directory structure")
         sys.exit(1)
     
-    os.chdir('content-strategy-engine')
+    os.chdir('contentr')
     print("🚀 Generating all repository files...")
     
     # 1. Root files
-    create_file("README.md", """# Content Strategy Engine - TiDB AgentX Hackathon 2025
+    create_file("README.md", """# Contentr - TiDB AgentX Hackathon 2025
 
 An agentic AI system that automates content strategy, planning, and execution using TiDB Serverless for vector search and data management.
 
@@ -38,8 +38,8 @@ An agentic AI system that automates content strategy, planning, and execution us
 ### Using Docker (Recommended)
 ```bash
 # Clone and setup
-git clone https://github.com/yourusername/content-strategy-engine.git
-cd content-strategy-engine
+git clone https://github.com/yourusername/contentr.git
+cd contentr
 cp .env.example .env  # Add your API keys
 
 # Start all services
@@ -177,7 +177,7 @@ services:
 """)
 
     # 4. Run instructions
-    create_file("run_instructions.txt", """# Content Strategy Engine - Run Instructions
+    create_file("run_instructions.txt", """# Contentr - Run Instructions
 
 ## Quick Start for Judges
 
@@ -337,8 +337,8 @@ CMD ["npm", "start"]
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
-    title="Content Strategy Engine",
-    description="AI-powered content strategy for TiDB Hackathon 2025",
+    title="Contentr",
+    description="AI-powered content automation for TiDB Hackathon 2025",
     version="1.0.0"
 )
 
@@ -353,7 +353,7 @@ app.add_middleware(
 @app.get("/")
 async def root():
     return {
-        "message": "Content Strategy Engine API",
+        "message": "Contentr API",
         "status": "running",
         "hackathon": "TiDB AgentX 2025"
     }
@@ -420,10 +420,10 @@ async def demo_dashboard():
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Content Strategy Engine
+          Contentr
         </h1>
         <p className="text-xl text-gray-600 mb-8">
-          AI-powered content strategy and automation for TiDB AgentX Hackathon 2025
+          AI-powered content automation and automation for TiDB AgentX Hackathon 2025
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -483,8 +483,8 @@ module.exports = {
     create_file("frontend/src/app/layout.tsx", '''import './globals.css'
 
 export const metadata = {
-  title: 'Content Strategy Engine',
-  description: 'AI-powered content strategy for TiDB Hackathon 2025',
+  title: 'Contentr',
+  description: 'AI-powered content automation for TiDB Hackathon 2025',
 }
 
 export default function RootLayout({
@@ -506,12 +506,12 @@ export default function RootLayout({
 
     print("\n🎉 Repository files generated successfully!")
     print("\n📋 Next steps:")
-    print("1. cd content-strategy-engine")
+    print("1. cd contentr")
     print("2. Add your API keys to .env file")
     print("3. Test locally: docker-compose up -d")
     print("4. Create GitHub repo and push:")
     print("   git add .")
-    print('   git commit -m "Initial commit: Content Strategy Engine"')
+    print('   git commit -m "Initial commit: Contentr"')
     print("   git remote add origin <your-github-repo-url>")
     print("   git push -u origin main")
     print("\n🏆 Ready for TiDB AgentX Hackathon 2025!")

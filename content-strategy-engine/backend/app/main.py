@@ -2,8 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
-    title="Content Strategy Engine",
-    description="AI-powered content strategy for TiDB Hackathon 2025",
+    title="Contentr",
+    description="AI-powered content automation for TiDB Hackathon 2025",
     version="1.0.0"
 )
 
@@ -18,7 +18,7 @@ app.add_middleware(
 @app.get("/")
 async def root():
     return {
-        "message": "Content Strategy Engine API",
+        "message": "Contentr API",
         "status": "running",
         "hackathon": "TiDB AgentX 2025"
     }

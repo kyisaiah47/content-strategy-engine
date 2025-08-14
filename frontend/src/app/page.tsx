@@ -16,7 +16,7 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Content Strategy Engine
+          Contentr
         </h1>
         <p className="text-xl text-gray-600 mb-8">
           AI-powered content strategy for TiDB AgentX Hackathon 2025

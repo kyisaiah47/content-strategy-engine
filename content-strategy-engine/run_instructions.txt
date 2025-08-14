@@ -1,4 +1,4 @@
-# Content Strategy Engine - Run Instructions
+# Contentr - Run Instructions
 
 ## Quick Start for Judges
 

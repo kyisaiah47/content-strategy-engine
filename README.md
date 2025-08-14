@@ -1,10 +1,10 @@
-# 🤖 Content Strategy Engine
+# 🤖 Contentr
 
 > **Winner Track:** TiDB AgentX Hackathon 2025 - Forging Agentic AI for Real-World Impact
 
 An intelligent AI system that automates entire content marketing workflows from strategy to execution using TiDB Serverless vector search and multi-step agentic AI.
 
-![Content Strategy Engine Demo](https://img.shields.io/badge/Demo-Live-brightgreen) ![TiDB Serverless](https://img.shields.io/badge/TiDB-Serverless-blue) ![Agentic AI](https://img.shields.io/badge/AI-Agentic-purple)
+![Contentr Demo](https://img.shields.io/badge/Demo-Live-brightgreen) ![TiDB Serverless](https://img.shields.io/badge/TiDB-Serverless-blue) ![Agentic AI](https://img.shields.io/badge/AI-Agentic-purple)
 
 ## 🎯 **What This Solves**
 
@@ -22,8 +22,8 @@ Content creators and marketing teams spend **10+ hours per week** manually:
 
 ```bash
 # Quick start with Docker
-git clone https://github.com/yourusername/content-strategy-engine.git
-cd content-strategy-engine
+git clone https://github.com/yourusername/contentr.git
+cd contentr
 cp .env.example .env  # Add your API keys
 docker-compose up -d
 
@@ -206,8 +206,8 @@ WHERE VEC_COSINE_DISTANCE(topic_embedding, :niche_embedding) < 0.3;
 
 ```bash
 # 1. Clone and configure
-git clone https://github.com/yourusername/content-strategy-engine.git
-cd content-strategy-engine
+git clone https://github.com/yourusername/contentr.git
+cd contentr
 cp .env.example .env
 
 # 2. Add your API keys to .env file
@@ -315,7 +315,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 </p>
 
 <p align="center">
-  <a href="https://github.com/yourusername/content-strategy-engine/stargazers">⭐ Star this repo</a> •
-  <a href="https://github.com/yourusername/content-strategy-engine/issues">🐛 Report bug</a> •
-  <a href="https://github.com/yourusername/content-strategy-engine/issues">💡 Request feature</a>
+  <a href="https://github.com/yourusername/contentr/stargazers">⭐ Star this repo</a> •
+  <a href="https://github.com/yourusername/contentr/issues">🐛 Report bug</a> •
+  <a href="https://github.com/yourusername/contentr/issues">💡 Request feature</a>
 </p>
