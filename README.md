@@ -307,13 +307,6 @@ MIT License - see [LICENSE](LICENSE) file for details.
 4. Push to branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
 
-## 📞 **Contact**
-
-- �� **Demo**: [https://content-strategy-engine.vercel.app](https://content-strategy-engine.vercel.app)
-- 📧 **Email**: your.email@example.com
-- 🐦 **Twitter**: [@yourusername](https://twitter.com/yourusername)
-- 💼 **LinkedIn**: [Your Name](https://linkedin.com/in/yourname)
-
 ---
 
 <p align="center">
