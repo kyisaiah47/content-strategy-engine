@@ -22,7 +22,7 @@ Content creators and marketing teams spend **10+ hours per week** manually:
 
 ```bash
 # Quick start with Docker
-git clone https://github.com/yourusername/contentr.git
+git clone https://github.com/kyisaiah47/contentr.git
 cd contentr
 cp .env.example .env  # Add your API keys
 docker-compose up -d
