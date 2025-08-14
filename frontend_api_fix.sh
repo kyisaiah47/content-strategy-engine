@@ -1,3 +1,15 @@
+#!/bin/bash
+
+# Frontend API Connection Fix
+# Ensures frontend connects to Railway backend properly
+
+echo "🔧 Fixing frontend API connection..."
+
+cd frontend
+
+echo "📝 Updating page.tsx to use environment variable..."
+
+cat > src/app/page.tsx << 'EOF'
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -292,3 +304,11 @@ export default function Dashboard() {
     </div>
   )
 }
+EOF
+
+echo "✅ Frontend updated with proper API connection!"
+echo ""
+echo "🚀 Deploy to Vercel:"
+echo "vercel --prod"
+echo ""
+echo "🧪 This should now show 'API: healthy' in the header!"
