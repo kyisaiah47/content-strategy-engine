@@ -1,3 +1,25 @@
+#!/bin/bash
+
+# Railway 502 Error Fix Script
+# This fixes common Railway deployment issues
+
+echo "🔧 Fixing Railway 502 error..."
+
+cd backend
+
+echo "📝 Creating Railway-optimized startup files..."
+
+# Create a simple startup script
+cat > start.sh << 'EOF'
+#!/bin/bash
+echo "Starting Contentr API on port $PORT"
+uvicorn app.main:app --host 0.0.0.0 --port $PORT
+EOF
+
+chmod +x start.sh
+
+# Update main.py to be more Railway-friendly
+cat > app/main.py << 'EOF'
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
@@ -118,3 +140,67 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
     logger.info(f"Starting server on port {port}")
     uvicorn.run(app, host="0.0.0.0", port=port)
+EOF
+
+# Create minimal requirements.txt
+cat > requirements.txt << 'EOF'
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-dotenv==1.0.0
+EOF
+
+# Update Dockerfile for Railway
+cat > Dockerfile << 'EOF'
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Copy and install requirements
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy app code
+COPY . .
+
+# Create startup script
+COPY start.sh .
+RUN chmod +x start.sh
+
+# Expose port (Railway will set PORT env var)
+EXPOSE $PORT
+
+# Start the application
+CMD ["./start.sh"]
+EOF
+
+# Create railway.json for explicit configuration
+cat > ../railway.json << 'EOF'
+{
+  "build": {
+    "builder": "dockerfile",
+    "dockerfilePath": "backend/Dockerfile"
+  },
+  "deploy": {
+    "startCommand": "cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT",
+    "healthcheckPath": "/health"
+  }
+}
+EOF
+
+echo "✅ Railway fixes applied!"
+echo ""
+echo "🚀 Next steps:"
+echo "1. Commit and push these changes:"
+echo "   git add ."
+echo "   git commit -m 'Fix Railway 502 error - simplified app'"
+echo "   git push origin main"
+echo ""
+echo "2. In Railway dashboard:"
+echo "   - Go to Variables tab"
+echo "   - Add: PORT = 8000"
+echo "   - Wait for auto-redeploy"
+echo ""
+echo "3. Test again:"
+echo "   curl https://contentr-production.up.railway.app/health"
+echo ""
+echo "🎯 This should fix the 502 error!"
