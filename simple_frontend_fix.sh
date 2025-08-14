@@ -1,3 +1,15 @@
+#!/bin/bash
+
+# Simple Frontend Fix - No Framer Motion
+# Removes dependencies that might cause build issues
+
+echo "🔧 Creating simple frontend without framer-motion..."
+
+cd frontend
+
+echo "📝 Creating build-friendly page.tsx..."
+
+cat > src/app/page.tsx << 'EOF'
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -296,3 +308,9 @@ export default function Dashboard() {
     </div>
   )
 }
+EOF
+
+echo "✅ Simple frontend created (no framer-motion dependency)!"
+echo ""
+echo "🚀 Deploy to Vercel:"
+echo "vercel --prod"
