@@ -1,3 +1,15 @@
+#!/bin/bash
+
+# CORS Fix Script
+# Fixes frontend-backend connection issues
+
+echo "🔧 Fixing CORS for frontend connection..."
+
+cd backend
+
+echo "📝 Updating CORS settings in main.py..."
+
+cat > app/main.py << 'EOF'
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
@@ -201,3 +213,18 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
     logger.info(f"Starting server on port {port}")
     uvicorn.run(app, host="0.0.0.0", port=port)
+EOF
+
+echo "✅ CORS settings updated!"
+echo ""
+echo "🚀 Push the changes:"
+echo "git add ."
+echo "git commit -m 'Fix CORS for frontend connection'"
+echo "git push origin main"
+echo ""
+echo "🔧 Then in Vercel:"
+echo "1. Make sure NEXT_PUBLIC_API_URL = https://contentr-production.up.railway.app"
+echo "2. Redeploy the frontend"
+echo ""
+echo "🧪 Test the connection:"
+echo "curl https://contentr-production.up.railway.app/api/test"
