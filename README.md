@@ -1,6 +1,6 @@
 # 🤖 Contentr
 
-> **Winner Track:** TiDB AgentX Hackathon 2025 - Forging Agentic AI for Real-World Impact
+> TiDB AgentX Hackathon 2025 - Forging Agentic AI for Real-World Impact
 
 An intelligent AI system that automates entire content marketing workflows from strategy to execution using TiDB Serverless vector search and multi-step agentic AI.
 
