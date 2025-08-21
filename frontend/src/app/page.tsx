@@ -194,12 +194,6 @@ export default function Dashboard() {
 				</div>
 				<div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="text-center">
-						<div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-md rounded-full px-4 py-2 mb-6">
-							<span className="text-2xl">🏆</span>
-							<span className="font-semibold">
-								TiDB AgentX Hackathon 2025 Winner
-							</span>
-						</div>
 						<h2 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
 							Agentic AI for
 							<span className="block bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
@@ -526,9 +520,6 @@ export default function Dashboard() {
 			<footer className="bg-gradient-to-r from-gray-900 to-black text-white py-12">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 					<div className="mb-6">
-						<h3 className="text-2xl font-bold mb-2">
-							🏆 TiDB AgentX Hackathon 2025
-						</h3>
 						<p className="text-gray-300 text-lg">
 							Contentr: Agentic AI for Real-World Content Automation
 						</p>
